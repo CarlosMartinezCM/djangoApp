@@ -1,4 +1,14 @@
+
 <!DOCTYPE html>
+
+{% load static %}
+
+<link
+rel="stylesheet"
+type="text/css"
+href="{% static 'home/css/bootstrap.css' %}"
+/>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,6 +16,16 @@
     <title>Document</title>
 </head>
 <body>
+    <div class="card" style="width: 18rem;">
+        <img src="{% static 'img/BW.jpg' %}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="Test Card BootStrap">Test Card</h5>
+          <p class="card-text">
+            test text for the card text area.
+          </p>
+          <a href="https://www.caecspace.com/" target="_blank" class="btn btn-primary">Check out my React Weather App!!</a>
+        </div>
+      </div>
     Hello Django!! It's me!! Carlos!!! 
     <p>Today is {{today}}</p>
 </body>
