@@ -1,30 +1,30 @@
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponse, HttpResponseRedirect
-from django.http import HttpResponse
-from django.template import loader
+from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.views import generic 
+
 from .models import Choice, Question
 
 # Create your views here.
 TEMPLATES_DIR = (
     'os.path.join(BASE_DIR, "templates"),'
 )
-def index(request):
-    latest_question_list = Question.objects.order_by("-pub_date")[:5]
-    template = loader.get_template("index.html")
-    context = {
-        "latest_question_list": latest_question_list,
-    }
-    return HttpResponse(template.render(context, request))
+class IndexView(generic.ListView):
+    template_name = "picks/index.html"
+    context_object_name = "latest_question_list"
+    
+    def get_queryset(self):
+        """Return the last five published questions."""
+        return Question.objects.order_by("-pub_date")[:1]
+        
+class DetailView(generic.DetailView):
+    model = Question
+    template_name = "picks/detail.html"
 
-def detail(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    return render(request, "detail.html", {"question": question})
-
-def results(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    return render(request, "results.html", {"question": question})
-
+class ResultsView(generic.DetailView):
+    model = Question
+    template_name = "picks/results.html"
+    
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:
@@ -33,7 +33,7 @@ def vote(request, question_id):
         # Redisplay the question voting form.
         return render(
             request,
-            "detail.html",
+            "picks/detail.html",
             {
                 "question": question,
                 "error_message": "You didn't select a choice.",
