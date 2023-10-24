@@ -1,0 +1,14 @@
+li a {
+    color: green;
+}
+
+body {
+    background: white url("../images/web_first_images_release.png") no-repeat;
+}
+
+.card {
+    align-items: center;
+}
+.card-body {
+    align-items: center;
+}

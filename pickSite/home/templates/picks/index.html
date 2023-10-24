@@ -2,6 +2,8 @@
 <!DOCTYPE html>
 
 {% load static %}
+<link rel="stylesheet" href="{% static 'home/css/style.css' %}">
+
 {% if latest_question_list %}
     <ul>
     {% for question in latest_question_list %}
@@ -24,7 +26,7 @@ href="{% static 'home/css/bootstrap.css' %}"
     <title>Document</title>
 </head>
 <body>
-    <div class="card" style="width: 18rem;">
+    <div class="align-item-center justify-content-center" style="width: 18rem;" >
         <img src="{% static 'img/BW.jpg' %}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="Test Card BootStrap">Test Card</h5>
